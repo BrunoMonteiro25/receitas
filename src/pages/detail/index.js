@@ -11,6 +11,7 @@ import { useRoute, useNavigation } from '@react-navigation/native'
 import { useLayoutEffect } from 'react'
 import { Entypo, AntDesign, Feather } from '@expo/vector-icons'
 import Ingredients from '../../components/ingredients'
+import Instructions from '../../components/instructions'
 
 export default function Detail() {
   const route = useRoute()
@@ -31,7 +32,11 @@ export default function Detail() {
   }, [navigation, route.params?.data])
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.container}
+      contentContainerStyle={{ paddingBottom: 14 }}
+    >
       <Pressable>
         <View style={styles.playIcon}>
           <AntDesign name="playcircleo" size={74} color="#fafafa" />
@@ -56,6 +61,20 @@ export default function Detail() {
 
       {route.params?.data.ingredients.map((item) => (
         <Ingredients key={item.id} data={item} />
+      ))}
+
+      <View style={styles.instructionsArea}>
+        <Text style={styles.instructionsText}>Modo de preparo</Text>
+        <Feather
+          name="chevrons-down"
+          size={24}
+          color="#fff"
+          style={styles.instructionsIcon}
+        />
+      </View>
+
+      {route.params?.data.instructions.map((item, index) => (
+        <Instructions key={item.id} data={item} index={index} />
       ))}
     </ScrollView>
   )
@@ -99,5 +118,21 @@ const styles = StyleSheet.create({
   ingredientsText: {
     marginBottom: 14,
     fontSize: 16,
+  },
+  instructionsArea: {
+    backgroundColor: '#4cbe6c',
+    flexDirection: 'row',
+    padding: 8,
+    borderRadius: 4,
+    marginBottom: 14,
+  },
+  instructionsText: {
+    fontSize: 18,
+    fontWeight: 500,
+    color: '#fff',
+    marginRight: 8,
+  },
+  instructionsIcon: {
+    marginTop: 2,
   },
 })
