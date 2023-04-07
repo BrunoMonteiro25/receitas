@@ -16,25 +16,48 @@ import Ingredients from '../../components/ingredients'
 import Instructions from '../../components/instructions'
 import VideoView from '../../components/video'
 
+import { isFavorite, saveFavorites, removeItem } from '../../utils/storage'
+
 export default function Detail() {
   const route = useRoute()
   const navigation = useNavigation()
 
   const [showVideo, setShowVideo] = useState(false)
+  const [favorite, setFavorite] = useState(false)
 
   useLayoutEffect(() => {
+    async function getStatusFavorites() {
+      const receipeFavorite = await isFavorite(route.params?.data)
+      setFavorite(receipeFavorite)
+    }
+    getStatusFavorites()
+
     navigation.setOptions({
       title: route.params?.data
         ? route.params?.data.name
         : 'Detalhes da receita',
 
       headerRight: () => (
-        <Pressable>
-          <Entypo name="heart" size={28} color="#ff4141" />
+        <Pressable onPress={() => handleFavoriteReceipe(route.params?.data)}>
+          {favorite ? (
+            <Entypo name="heart" size={28} color="#ff4141" />
+          ) : (
+            <Entypo name="heart-outlined" size={28} color="#ff4141" />
+          )}
         </Pressable>
       ),
     })
-  }, [navigation, route.params?.data])
+  }, [navigation, route.params?.data, favorite])
+
+  async function handleFavoriteReceipe(receipe) {
+    if (favorite) {
+      await removeItem(receipe.id)
+      setFavorite(false)
+    } else {
+      await saveFavorites('@appreceitas', receipe)
+      setFavorite(true)
+    }
+  }
 
   function handleOpenvideo() {
     setShowVideo(true)
