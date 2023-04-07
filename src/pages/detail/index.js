@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   Modal,
+  Share,
 } from 'react-native'
 
 import { useRoute, useNavigation } from '@react-navigation/native'
@@ -39,6 +40,17 @@ export default function Detail() {
     setShowVideo(true)
   }
 
+  async function shareReceipe() {
+    try {
+      await Share.share({
+        url: 'https://google.com.br',
+        message: `Receita: ${route.params?.data.name}\nIngredientes: ${route.params?.data.total_ingredients}`,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -62,7 +74,7 @@ export default function Detail() {
             ingredientes ({route.params?.data.total_ingredients})
           </Text>
         </View>
-        <Pressable>
+        <Pressable onPress={shareReceipe}>
           <Feather name="share-2" size={24} color="#121212" />
         </Pressable>
       </View>
