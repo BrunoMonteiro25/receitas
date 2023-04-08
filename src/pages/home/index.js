@@ -18,6 +18,8 @@ import FoodList from '../../components/foodlist'
 
 import { useNavigation } from '@react-navigation/native'
 
+import { Text as MotiText } from 'moti'
+
 export default function Home() {
   const [inputValue, setInputValue] = useState('')
   const [foods, setFoods] = useState([])
@@ -44,8 +46,22 @@ export default function Home() {
     <SafeAreaView style={styles.container}>
       <Logo />
 
-      <Text style={styles.title}>Encontre a receita</Text>
-      <Text style={styles.title}>que combina com você</Text>
+      <MotiText
+        from={{ opacity: 0, translateY: 15 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ delay: 100, type: 'timing', duration: 650 }}
+        style={styles.title}
+      >
+        Encontre a receita
+      </MotiText>
+      <MotiText
+        from={{ opacity: 0, translateY: 18 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ delay: 200, type: 'timing', duration: 850 }}
+        style={styles.title}
+      >
+        que combina com você
+      </MotiText>
 
       <View style={styles.form}>
         <TextInput
