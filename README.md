@@ -1,6 +1,6 @@
 # Aplicativo de Receitas
 
-[Funcionalidades](#funcionalidades-checkered_flag) | [Tecnologias](#tecnologias-computer) | [API](#api-mag) | [Como rodar a aplicação](#como-rodar-a-aplicação-arrow_forward)
+[Funcionalidades](#funcionalidades-checkered_flag) | [Tecnologias](#tecnologias-computer) | [Dependências](#dependências-mag) | [Como rodar a aplicação](#como-rodar-a-aplicação-arrow_forward)
 ##
 
 ### Descrição do Projeto :star:
@@ -44,9 +44,19 @@ Aplicativo de receitas feito durante o evento de React Native do canal do youtub
 
 React Native + JSON Server
 
-### API :mag:
+### Dependências :mag:
 
-JSON Server
+- react navigation(bottom-tabs, native-stack) - para as rotas e menu
+- json server - simular uma api para as receitas
+- axios - para requisições
+- expo-linear-gradient - para o gradient das fotos
+- react-native-webview - para abrir um site dentro do app
+- react-native-async-storage - para salvar informações em cache (favoritar receita)
+
+animações:
+- npm i moti --legacy-peer-deps
+- npx expo install react-native-reanimated
+- npx expo install react-native-gesture-handler
 
 ### Como rodar a aplicação :arrow_forward:
 
